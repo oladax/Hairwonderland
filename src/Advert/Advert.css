@@ -1,19 +1,30 @@
 .Advert{
     background-color: #fdecefcf;
     color: black;
-    padding-top: 9px;
-    padding-bottom:9px;
+    width: 100%;
+    margin: auto;
     font-family: 'Merriweather', serif; /* Use Merriweather for the title */
+    
 }
 
 .Advert div{
-  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 12px 12px;
+  top: 0;
+  z-index: 12;
+  width: 100%;
+  background-color: #fdecefcf;
+  transition:  0.3s ease;
+
 }
 
 .Advert div span{
-    letter-spacing: 5px;
+    letter-spacing: 3px;
     font-size: 10px;
-    font-style: oblique;
+    font-style: normal;
   color: rgba(0, 0, 0, 0.87);
 }
 

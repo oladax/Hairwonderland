@@ -5,10 +5,11 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 function Advert() {
   return (
-        <div className='Advert'>
+    <div className="Advert">
+     
       <div>
         <span>
-          RESTOCKS ARE EVERY FRIDAY! <FontAwesomeIcon icon={faBell}/>
+          RESTOCKS ARE EVERY FRIDAY! <FontAwesomeIcon icon={faBell} />
         </span>
       </div>
     </div>

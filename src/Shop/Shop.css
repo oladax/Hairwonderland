@@ -1,0 +1,8 @@
+.shop {
+    display: flex;
+    justify-content: center;
+    height: 50vh;
+    color: white;
+    align-items: center;
+    background-color: black;
+}

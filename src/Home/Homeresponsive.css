@@ -1,0 +1,154 @@
+@media screen and (max-width: 1215px) {
+    .Home{
+        display: grid;
+        place-items: center;
+        background-color: #fdecefcf;
+                padding-top: 0rem;
+    }
+}
+
+
+@media screen and (max-width: 1200px) {
+    .Home{
+        display: grid;
+        place-items: center;
+        background-color: #fdecefcf;
+        padding-top: 0rem;
+    }
+}
+
+@media screen and (max-width:1160px) {
+    .Home{
+        display: grid;
+        place-items: center;
+        padding-top: 0rem;
+        background-color: #fdecefcf;
+        gap: 50px;
+    }
+
+    .content-section .content-container {
+        display: flex;
+        flex-direction: column;
+        padding-left: 4rem;
+    }
+
+    .image-container {
+        position: relative;
+        display: inline-block;
+        padding-right: 4rem;
+        margin-top: -75px;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .Homesubcontainer {
+        width: 100%;
+        display: grid;
+        place-items: center;
+        background-color: #fdecefcf;
+      
+      }
+      
+      .Homesubcontainer .Home-sub {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: 1fr;
+        max-width: 100rem;
+        width: 100%;
+        row-gap: 10rem;
+        padding-bottom: 0px;
+      }
+    
+
+      .content-section{
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      
+ 
+      .content-section .content-container {
+        padding-left: -0rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        }
+
+           .Homesubcontainer .Home-sub {
+               padding-top: 6rem;
+           }
+
+
+  .Home {
+    display: grid;
+    place-items: center;
+    padding-top: 0rem;
+    background-color: #fdecefcf;
+  
+}
+
+.container {
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    padding-right: 0rem;
+    margin-top: -75px;
+}
+
+
+.Carousel {
+    background-position: center;
+    height: 75vh;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 100rem;
+}
+
+.firstimage {
+    max-width: 100rem;
+    height: 75vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+ background-image: url(../Home/Wigfolder/Wig.png);
+}
+}
+
+@media screen and (max-width: 500px) {
+    .stationary-bg{
+        background-color: #f6d317eb;
+        border-radius: 100px;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        display: flex;
+        font-family: 'Playfair Display', sans-serif;
+        flex-direction: column;
+      }
+
+          .Carousel {
+              background-position: center;
+              height: 70vh;
+              width: 100%;
+              margin: 0 auto;
+              max-width: 100rem;
+          }
+    
+          .firstimage {
+              max-width: 100rem;
+              height: 70vh;
+              width: 100%;
+              background-repeat: no-repeat;
+              background-size: cover;
+              position: relative;
+          }
+}

@@ -1,0 +1,89 @@
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import human1 from "../Home/Wigfolder/thumbnails3.png";
+import human2 from "../Home/Wigfolder/colorwig.png";
+import human3 from "../Home/Wigfolder/thumbnails4.png";
+import human4 from "../Home/Wigfolder/thumbnails1.png";
+import "./ImageCarousel.css"; // Import your custom CSS file
+
+const ImageCarousel = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 3000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+  };
+
+  return (
+    <Slider {...settings} className="image-carousel-container">
+     
+            <div className="carousel-slide">
+              <img src={human1} alt="Slide 1" className="carousel-image" />
+              <div className="carouseltextcon">
+                <div className="textcon">
+                  <div className="text">
+                    <h2>Discover Your Perfect Hairstyle</h2>
+                    <p>Explore a Range of Hair Shades</p>
+                  </div>
+                  <div>
+                    <button>Shop now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="carousel-slide">
+              <img src={human2} alt="Slide 2" className="carousel-image" />
+              <div className="carouseltextcon">
+                <div className="textcon">
+                  <div className="text">
+                    <h2>Discover Your Perfect Hairstyle</h2>
+                    <p>Explore a Range of Hair Shades</p>
+                  </div>
+                  <div>
+                    <button>Shop now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="carousel-slide">
+              <img src={human3} alt="Slide 3" className="carousel-image" />
+              <div className="carouseltextcon">
+                <div className="textcon">
+                  <div className="text">
+                    <h2>Discover Your Perfect Hairstyle</h2>
+                    <p>Explore a Range of Hair Shades</p>
+                  </div>
+                  <div>
+                    <button>Shop now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="carousel-slide">
+              <img src={human4} alt="Slide 4" className="carousel-image" />
+              <div className="carouseltextcon">
+                <div className="textcon">
+                  <div className="text">
+                    <h2>Discover Your Perfect Hairstyle</h2>
+                    <p>Explore a Range of Hair Shades</p>
+                  </div>
+                  <div>
+                    <button>Shop now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+    </Slider>
+  );
+};
+
+export default ImageCarousel;

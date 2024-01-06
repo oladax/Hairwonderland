@@ -1,147 +1,214 @@
-/* Home.css */
+.Home{
+  display: grid;
+  place-items: center;
+   padding-top: 0rem;
+  }
 
-.Home{    
-  margin-top: 8rem;
-
+.Home main{
+  background-color: #fdecefcf;
+  width: 100%;
 }
 
 .Homesubcontainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .content-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background-color: #fdecefcf;
 
-  .content-section .content-container{
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    padding-left: 9rem;
-  }
-  
+}
 
-  /* YourComponent.css */
+.Homesubcontainer .Home-sub{
+  display: grid;
+  justify-content: space-around;
+  align-items: center;
+  grid-template-columns: 1fr  1fr;
+  width: 100%;
+  max-width: 100rem;
+  padding-bottom: 3rem;
+  gap: 50px;
+  padding-top: 10rem;
+}
+
+
+.content-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.content-section .content-container{
+  display: flex;
+  flex-direction: column;
+  padding-left: 9rem;
+}
+
+
+h3{
+  padding-bottom: 30px;
+}
+
+/* YourComponent.css */
 
 .container {
-  position: relative;
+position: relative;
 }
 
 .image-container {
-  position: relative;
-  display: inline-block;
-  padding-right: 8rem;
+position: relative;
+display: inline-block;
+padding-right: 8rem;
+}
+
+.image-container img{
+  width: 100%;
+  object-fit: cover;
+  object-position: center; 
+  transition: opacity 0.5s ease-in-out; /* You can adjust the duration and easing function */
+  max-width: 100%; /* Ensures the image doesn't exceed the container width */
+  max-height: 100%; /* Ensures the image doesn't exceed the container height */
+  object-fit: cover; 
+  background-color: rgb(152 103 177 / 14%);
+
 }
 
 .overlay-text {
-  position: absolute;
-  top: 39px;
-  left: 110px;
+position: absolute;
+top: 39px;
+left: 110px;
 }
 
 
 .bestseller-container{
-  position: absolute;
-  bottom: 9rem;
-  left: 90px;
+position: absolute;
+bottom: 6rem;
+left: 90px;
 }
 
 /* YourComponent.css */
 
 .bestseller-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;}
+display: flex;
+justify-content: center;
+align-items: center;}
 
 .firstdiv {
-  position: relative;
+position: relative;
 }
 
 
 
 .stationary-bg{
-  background-color: gold;
+  background-color: #f6d317eb;
   border-radius: 144px;
   text-align: center;
-  padding-top: 40px;
-  padding-bottom: 39px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
   display: flex;
-  flex-direction: column;}
-
-.stationary-text {
-  font-size: 27px;
-  font-weight: 200;}
-
-.overlay-text span {
-  font-size: 20px;
-  font-family: 'tangerine';
+  font-family: 'Playfair Display', sans-serif;
+  flex-direction: column;
 }
 
-  
-  
-  .content-container div span{
-    font-family: 'Tangerine', cursive;
-    font-size: 25px;
-    color: #3D5A5B;
-    font-weight: 700;
+.stationary-text {
+font-size: 27px;
+font-weight: 200;}
+
+
+.content-container div span{
+  font-family: 'Tangerine', cursive;
+  font-size: 25px;
+  color: #3D5A5B;
+  font-weight: 700;
+}
+
+.content-container div h2{
+  font-family: 'Playfair Display', serif;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  padding-bottom: 15px;
+  font-size: 2.2em;
+  font-weight: 800;
+  width: 100%;
+  letter-spacing: 0px;
   }
 
-  .content-container div h2{
-    font-family: 'Playfair Display', serif;
-    color: rgb(0, 0, 0);
+  .description-para p{
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    text-decoration: none;  
+    line-height: 1.7em;
+    width: 100%;
+    max-width: 500px;
+    padding-bottom: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+
+  .talk-to-sale button{
+    background-color: purple;
+    color: white;
+    padding: 13px 30px;
+    font-size: 0.9em;
+    text-align: center;
+    border-radius: 5px;
+    border-width: 0;
+    opacity: 0.9;
+    cursor: pointer;
     text-decoration: none;
-    padding-bottom: 15px;
-    font-size: 2.5em;
-    font-weight: 800;
-    letter-spacing: 4px;
-    }
+    outline: none;
+    font-family: 'Playfair Display', sans-serif;
+  }
 
-    .description-para p{
-      font-size: 15px;
-      letter-spacing: 0.5px;
-      font-weight: 400;
-      text-decoration: none;  
-      line-height: 1.7em;
-      width: 100%;
-      max-width: 500px;
-      }
+  .talk-to-sale button:active{
+    background-color: #3D5A5B;
+    opacity: 0.9;
+    cursor: pointer;
+  }
 
+  .talk-to-sale button a{
+    text-decoration: none;
+    color: white;
+    border: none;
+  
+  }
 
-    .talk-to-sale button{
-     background-color:  teal;
-      color: white;
-      padding: 13px 30px;
-      font-size: 0.9em;
-      text-align:  center;
-      border-radius: 5px;
-      border-width: 0;
-      opacity: 0.9;
-      cursor: pointer;
-      transition: 1sm linear;
-      text-decoration: none;
-      outline: none;
-    }
+  
 
-    .talk-to-sale button:active{
-      background-color: #3D5A5B;
-      opacity: 0.9;
-      cursor: pointer;
-    }
+  .stationary-control{
+    position: relative;
+    top: 90px;
+    left: -73px;
+  }
 
-    .talk-to-sale button a{
-      text-decoration: none;
-      color: white;
-      border: none;
-      
-    }
+  .image-container img {
+    width: 100%;
+    height: auto;
+    transition: filter 0.5s ease-in-out;
+    animation: colorChange 8s infinite;
+}
 
+/* Adjust filter properties for contrast reduction */
+.image-container img.low-contrast {
+    filter: contrast(0.8) brightness(1.2);
+}
 
-
-
-    
+@keyframes colorChange {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    filter: hue-rotate(90deg) grayscale(100%);
+  }
+  50% {
+    filter: grayscale(100%) hue-rotate(0deg);
+  }
+  75% {
+    filter: hue-rotate(90deg) grayscale(100%);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
+}

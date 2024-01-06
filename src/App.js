@@ -1,20 +1,18 @@
-import React from 'react'
-import Advert from './Advert/Advert'
-import Navbar from './Navbars/Navbar'
-import Home from './Home/Home'
+import React from 'react';
+import Navbar from './Navbars/Navbar';
+import Home from './Home/Home';
+import Shop from './Shop/Shop';
 
 function App() {
   return (
-    <div    
-    className='overall-container'>  
-     <Advert/>
+    <div className='overall-container'>
+      
+      <Navbar />
 
-     <Navbar/>
-
-     <Home/>
- d
+      <Home/>
+      <Shop/>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
