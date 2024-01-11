@@ -1,20 +1,22 @@
 /* Navbar.css */
-.Navbar-cons{
-width: 100%;
-    background-color: #fdecefcf;}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+.Navbar-cons {
+  width: 100%;
+  background-color: #fdecefcf;
+}
 
-main{
+main {
   font-family: 'Merriweather', serif;
   display: grid;
-   place-items: center;
-   background-color: white;
-   width: 100%;
+  place-items: center;
+  background-color: white;
+  width: 100%;
 }
 
 /* Navbar.css */
 
 header {
-  padding: 14px 14px;
+  padding: 18px 3px;
   position: fixed;
   top: 30px;
   width: 100%;
@@ -36,115 +38,119 @@ header {
 }
 
 .navbar {
-    display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding-left: 15px;
-      padding-right: 15px;
-      max-width: 100rem;
-      transition: top 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 100rem;
+  transition: top 0.3s ease;
 }
 
 
 
-  .links{
-    display: flex;
-      justify-content: center;
-      align-items: center;
-      list-style: none;
-      text-align: center;
-      margin-right: 1rem;  }
-  
-  ul {
-    display: block;
-  }
+.links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+  margin-right: 1rem;
+}
 
-  
-  li {
-    cursor: pointer;
-    margin-left: 3em;
-    margin-right: 3em;
-    transition: 1sm linear;
-  }
-
-  li a{
-    color: black;
-    text-decoration: none;
-    font-size: 15px;
-    font-family: 'Playfair Display', sans-serif;
-  }
+ul {
+  display: block;
+}
 
 
-  li:hover{
-    color:  #d2b7b7 ;
+li {
+  cursor: pointer;
+  margin-left: 3em;
+  margin-right: 3em;
+  transition: 1sm linear;
+}
+
+li a {
+  color: black;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 800;
+    font-family: 'Poppins', sans-serif;
   }
 
 
-  .cart-container{
-    position: relative;
-    left: -15px;
+li:hover {
+  color: #d2b7b7;
+}
 
-  }
-  
-  .cart {
-        list-style: none;
-          width: 0px;
-          font-size: 20px;
-          margin: 0;
-  }
 
-  .cart:hover{
-    color: black;
-  }
+.cart-container {
+  position: relative;
+  left: -15px;
 
-  .cart-container span{
-          position: absolute;
-            top: -9px;
-            right: -6px;
-            font-size: 11px;
-   }
-  
+}
 
-   .cart-container img{
-    width: 25px;
-    height: 25px;
-   }
-  .logo {
-    font-size: 1.4em;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
+.cart {
+  list-style: none;
+  width: 0px;
+  font-size: 20px;
+  margin: 0;
+}
 
-  .logo h1{
-    font-family: 'Sevillana', serif;
-    font-weight: 700;
-    letter-spacing: initial;
-    font-size: 30px;
-  }
-  
-  .dropdowncart{
-        display: flex;
-          align-items: center;
-          gap: 0px;
-          justify-content: center;;
-  }
+.cart:hover {
+  color: black;
+}
 
-  .dropdown {
-    display: none;
-  }
+.cart-container span {
+  position: absolute;
+  top: -9px;
+  right: -6px;
+  font-size: 11px;
+}
 
-  
 
-  .dropdown button{
-    background: none;
-    border: none;
-    vertical-align: inherit;
-    cursor: pointer;
-    font-size: 20px;
-    }
+.cart-container img {
+  width: 25px;
+  height: 25px;
+}
 
-                
+.logo {
+  font-size: 1.4em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.logo h1 {
+  font-family: 'Sevillana', serif;
+  font-weight: 700;
+  letter-spacing: initial;
+  font-size: 30px;
+}
+
+.dropdowncart {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  justify-content: center;
+  ;
+}
+
+.dropdown {
+  display: none;
+}
+
+
+
+.dropdown button {
+  background: none;
+  border: none;
+  vertical-align: inherit;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
 .dropdownmenu-container {
   background-color: rgba(255, 255, 255, 0);
   z-index: 200;
@@ -159,7 +165,7 @@ header {
   display: none;
 }
 
-.dropdownmenu-container.appear{
+.dropdownmenu-container.appear {
   display: block;
 }
 
@@ -188,12 +194,12 @@ header {
 }
 
 .menu-div a {
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: none;
   font-weight: 500;
   color: black;
-  font-family: 'Playfair Display', sans-serif;
-  letter-spacing: 0.5px;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;  letter-spacing: 0.5px;
 
 }
 
@@ -282,4 +288,4 @@ header {
   padding-right: 12px;
   max-width: 100rem;
   transition: top 0.3s ease;
-  }
+}

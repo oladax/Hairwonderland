@@ -1,0 +1,42 @@
+@media screen and (max-width: 700px) {
+    .contact{
+        padding-bottom: 0rem;
+    }
+.form-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 100rem;
+        flex-direction: column;
+    }
+
+    .contact .divs h2 {
+    font-family: 'Merriweather',
+            serif;
+        font-size: 1.5em;
+        color: black;    }
+
+    .form-container form{
+            background-color: black;
+                width: 100%;
+                padding-left: 20px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                max-width: 100rem;
+    }
+
+    .maincontact{
+            width: 100%;
+                max-width: 100rem;
+                padding-left: 20px;
+                background-image: url(http://localhost:3000/Wigwonderland/static/media/molly-blackbird-a-xEUwYSPLw-unsplash.676d0524b791d38ee6a2.jpg);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+    }
+    .contact-container{
+        padding-top: 4rem;
+    }
+    
+}

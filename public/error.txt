@@ -1,89 +1,81 @@
 import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import human1 from "../Home/Wigfolder/thumbnails3.png";
-import human2 from "../Home/Wigfolder/colorwig.png";
-import human3 from "../Home/Wigfolder/thumbnails4.png";
-import human4 from "../Home/Wigfolder/thumbnails1.png";
-import "./ImageCarousel.css"; // Import your custom CSS file
+import "./footer.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInstagram,
+  
+  faFacebook
+} from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
 
-const ImageCarousel = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 3000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-  };
 
+function Lastpage() {
   return (
-    <Slider {...settings} className="image-carousel-container">
-     
-            <div className="carousel-slide">
-              <img src={human1} alt="Slide 1" className="carousel-image" />
-              <div className="carouseltextcon">
-                <div className="textcon">
-                  <div className="text">
-                    <h2>Discover Your Perfect Hairstyle</h2>
-                    <p>Explore a Range of Hair Shades</p>
-                  </div>
-                  <div>
-                    <button>Shop now</button>
-                  </div>
-                </div>
+    <div className="footer">
+      <footer>
+        <div className="content">
+          <div className="left box">
+            <div className="upper">
+              <div className="topic">About us</div>
+              <p>
+                CodingLab is a channel where you can learn HTML, CSS, and also
+                JavaScript along with creative CSS Animations and Effects.
+              </p>
+            </div>
+            <div className="lower">
+              <div className="topic">Contact us</div>
+              <div className="phone">
+                <a href="tel:+00790896767">
+                  <FontAwesomeIcon icon={faPhoneVolume} />
+                  +007 9089 6767
+                </a>
               </div>
+              <div className="email">
+                <a href="mailto:abc@gmail.com">
+                  <FontAwesomeIcon icon={faEnvelope} />
+                  abc@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="middle box">
+            <div className="topic">Our Services</div>
+            <div>
+              <a href="#">Woman Hair</a>
             </div>
 
-            <div className="carousel-slide">
-              <img src={human2} alt="Slide 2" className="carousel-image" />
-              <div className="carouseltextcon">
-                <div className="textcon">
-                  <div className="text">
-                    <h2>Discover Your Perfect Hairstyle</h2>
-                    <p>Explore a Range of Hair Shades</p>
-                  </div>
-                  <div>
-                    <button>Shop now</button>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <a href="#">Theme Development, Design</a>
             </div>
-
-            <div className="carousel-slide">
-              <img src={human3} alt="Slide 3" className="carousel-image" />
-              <div className="carouseltextcon">
-                <div className="textcon">
-                  <div className="text">
-                    <h2>Discover Your Perfect Hairstyle</h2>
-                    <p>Explore a Range of Hair Shades</p>
-                  </div>
-                  <div>
-                    <button>Shop now</button>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <a href="#">Mobile Application Design</a>
             </div>
-
-            <div className="carousel-slide">
-              <img src={human4} alt="Slide 4" className="carousel-image" />
-              <div className="carouseltextcon">
-                <div className="textcon">
-                  <div className="text">
-                    <h2>Discover Your Perfect Hairstyle</h2>
-                    <p>Explore a Range of Hair Shades</p>
-                  </div>
-                  <div>
-                    <button>Shop now</button>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <a href="#">Wire raming & Prototyping</a>
             </div>
-         
-    </Slider>
+          </div>
+          <div className="right box">
+            <div className="topic">Subscribe us</div>
+            <form action="#">
+              <input type="text" placeholder="Enter email address" />
+              <input type="submit" name="" value="Send" />
+              <div className="media-icons">
+                <a href="#">
+                  <FontAwesomeIcon icon={faFacebook} />
+                </a>
+                <a href="#">
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </footer>
+      <div className="copyright">
+        <p>&copy; 2024 WigWonderland. All rights reserved.</p>
+      </div>
+    </div>
   );
-};
+}
 
-export default ImageCarousel;
+export default Lastpage;

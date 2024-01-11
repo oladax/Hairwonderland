@@ -2,7 +2,9 @@
     display: flex;
     justify-content: center;
     height: 50vh;
-    color: white;
+    color: black;
     align-items: center;
-    background-color: black;
+    background-color: white;
+    max-width: 100rem;
+    width: 100%;
 }

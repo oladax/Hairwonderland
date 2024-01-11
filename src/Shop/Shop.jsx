@@ -5,7 +5,8 @@ import "./Shop.css";
 function Shop() {
   return (
     <div className='shop'>
-       <h1>SHOP NEXT</h1>
+       <h2>SHOP NEXT</h2>
+       
     </div>
   )
 }
