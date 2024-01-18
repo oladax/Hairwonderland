@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Hairwonderland/static/css/main.a3aa4d74.css",
-    "main.js": "/Hairwonderland/static/js/main.05bb082b.js",
+    "main.css": "/Hairwonderland/static/css/main.a05dbc34.css",
+    "main.js": "/Hairwonderland/static/js/main.175af782.js",
     "static/media/thumbnails2-removebg-preview.png": "/Hairwonderland/static/media/thumbnails2-removebg-preview.fcdc417b23b1f473c09b.png",
     "static/media/istock2_result-removebg-preview - Copy.png": "/Hairwonderland/static/media/istock2_result-removebg-preview - Copy.f7af19c6f51d16d5bdf0.png",
     "static/media/smiling-4654734_1280.jpg": "/Hairwonderland/static/media/smiling-4654734_1280.439750a9163f64c6cf5d.jpg",
@@ -11,15 +11,14 @@
     "static/media/Unionpay-removebg-preview.png": "/Hairwonderland/static/media/Unionpay-removebg-preview.875cd8f555f6f905532d.png",
     "static/media/master-card-icon-11657_prev_ui.png": "/Hairwonderland/static/media/master-card-icon-11657_prev_ui.a97531c355baf9d6d855.png",
     "static/media/icon.png": "/Hairwonderland/static/media/icon.cfcacd1947be771cee7d.png",
-    "static/media/Visa-removebg-preview.png": "/Hairwonderland/static/media/Visa-removebg-preview.421b74176ddd8a903fed.png",
     "static/media/t_discover-card4683-removebg-preview.png": "/Hairwonderland/static/media/t_discover-card4683-removebg-preview.00730211fe63d0a5434b.png",
     "static/media/cart.png": "/Hairwonderland/static/media/cart.647bbb2e96bf8aa9026a.png",
     "index.html": "/Hairwonderland/index.html",
-    "main.a3aa4d74.css.map": "/Hairwonderland/static/css/main.a3aa4d74.css.map",
-    "main.05bb082b.js.map": "/Hairwonderland/static/js/main.05bb082b.js.map"
+    "main.a05dbc34.css.map": "/Hairwonderland/static/css/main.a05dbc34.css.map",
+    "main.175af782.js.map": "/Hairwonderland/static/js/main.175af782.js.map"
   },
   "entrypoints": [
-    "static/css/main.a3aa4d74.css",
-    "static/js/main.05bb082b.js"
+    "static/css/main.a05dbc34.css",
+    "static/js/main.175af782.js"
   ]
 }
