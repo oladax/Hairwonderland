@@ -1,31 +1,106 @@
-import React from 'react';
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-import Navbar from './Navbars/Navbar';
-import Home from './Home/Home';
-import Shop from './Shop/Shop';
-import NewIn from './NewIn/NewIn';
-import Cart from './Cart/Cart';
-import Login from './Advert/Login';
+// Import necessary Firebase modules
+import { initializeApp } from "firebase/app";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  onAuthStateChanged, 
+  signOut, 
+  GoogleAuthProvider, 
+  signInWithPopup, 
+  sendPasswordResetEmail 
+} from "firebase/auth";
 
-function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path='/' element={<Navbar />}>
-        <Route index element={<Home />} />
-        <Route path='/Shop' element={<Shop />} />
-        <Route path='/NewIn' element={<NewIn />} />
-        <Route path='/Cart' element={<Cart />} />
-        <Route path='*' element={<Home />} />
-        <Route path='/Login' element={<Login />} />
-      </Route>
-    )
-  );
+// Your Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDFJY_3Uok0lJCH8zX1vi0BqXfSIrhIU24",
+  authDomain: "wigwonderland-bc6f0.firebaseapp.com",
+  projectId: "wigwonderland-bc6f0",
+  storageBucket: "wigwonderland-bc6f0.appspot.com",
+  messagingSenderId: "657178258299",
+  appId: "1:657178258299:web:bd3babffc1b9f7311febde",
+  measurementId: "G-9NKET1239L"
+};
 
-  return (
-      <div className='main-container'>
-        <RouterProvider router={router} />
-      </div>
-  );
-}
 
-export default App;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Sign up with email and password
+const signUpWithEmailAndPassword = async (email, password) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User signed up:", user);
+  } catch (error) {
+    console.error("Error signing up:", error.message);
+    throw error;
+  }
+};
+
+// Sign in with email and password
+const signInWithEmailAndPasswordWithEmail = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User signed in:", user);
+  } catch (error) {
+    console.error("Error signing in:", error.message);
+    throw error;
+  }
+};
+
+// Google Sign In
+const signInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("User signed in with Google:", user);
+  } catch (error) {
+    console.error("Error signing in with Google:", error.message);
+    throw error;
+  }
+};
+
+// Reset password
+const resetPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+  } catch (error) {
+    console.error("Error resetting password:", error.message);
+    throw error;
+  }
+};
+
+// Sign out
+const signOutUser = async () => {
+  try {
+    await signOut(auth);
+    console.log("User signed out");
+  } catch (error) {
+    console.error("Error signing out:", error.message);
+  }
+};
+
+// Check if the user is authenticated
+const checkAuthState = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("User is signed in:", user);
+    } else {
+      console.log("User is signed out");
+    }
+  });
+};
+
+export {
+  auth,
+  signUpWithEmailAndPassword,
+  signInWithEmailAndPasswordWithEmail,
+  signInWithGoogle,
+  signOutUser,
+  checkAuthState,
+  resetPassword,
+};
+ 
