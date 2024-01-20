@@ -1,31 +1,118 @@
-import React from 'react';
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-import Navbar from './Navbars/Navbar';
-import Home from './Home/Home';
-import Shop from './Shop/Shop';
-import NewIn from './NewIn/NewIn';
-import Cart from './Cart/Cart';
-import Login from './Advert/Login';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { signUpWithEmailAndPassword, signInWithGoogle } from "../firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import google from './google.png'
 
-function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path='/' element={<Navbar />}>
-        <Route index element={<Home />} />
-        <Route path='/Shop' element={<Shop />} />
-        <Route path='/NewIn' element={<NewIn />} />
-        <Route path='/Cart' element={<Cart />} />
-        <Route path='*' element={<Home />} />
-        <Route path='/Login' element={<Login />} />
-      </Route>
-    )
-  );
+function Registration() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [showError, setShowError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
+  const handleSignUp = async () => {
+    setError(null);
+    setShowError(false);
+
+    if (!email || !password) {
+      setShowError(true);
+      return;
+    }
+
+    try {
+      await signUpWithEmailAndPassword(email, password);
+      navigate("/login");
+    } catch (error) {
+      setError(`Error signing up: ${error.message}`);
+    }
+  };
+
+  const handleSignUpWithGoogle = async () => {
+    setError(null);
+    setShowError(false);
+
+    try {
+      await signInWithGoogle();
+      navigate("/login");
+    } catch (error) {
+      setError(`Error signing up with Google: ${error.message}`);
+    }
+  };
 
   return (
-      <div className='main-container'>
-        <RouterProvider router={router} />
+    <div className="login">
+      <div className="login-con">
+        <div className="login-details">
+          <h2>Register with us</h2>
+          <div className="input-div">
+            <div className="email-container">
+              <input
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
+                style={{ border: showError && !email ? "2px solid red" : "" }}
+              />
+              <span>
+                <FontAwesomeIcon icon={faEnvelope} />
+              </span>
+            </div>
+            {showError && !email && (
+              <span className="validation-error">Email is required.</span>
+            )}
+
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+                style={{
+                  border: showError && !password ? "2px solid red" : "",
+                }}
+              />
+
+              <FontAwesomeIcon
+                className="fakey"
+                icon={showPassword ? faEyeSlash : faEye}
+                onClick={togglePasswordVisibility}
+              />
+            </div>
+            {showError && !password && (
+              <p className="validation-error">Password is required.</p>
+            )}
+          </div>
+
+          <div className="btn-con">
+            <button onClick={handleSignUp}>Sign Up</button>
+          </div>
+
+          <div className="registercontainer">
+            <p>
+              Already have an account? <Link to="/login">Login here</Link>
+            </p>
+          </div>
+
+          <p className="OR">Or</p>
+
+          <div className="google-div">
+            <button onClick={handleSignUpWithGoogle}>
+              Sign Up with Google
+            </button>
+
+            <img src={google} alt="google" />
+          </div>
+        </div>
       </div>
+    </div>
   );
 }
 
-export default App;
+export default Registration;
