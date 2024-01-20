@@ -1,148 +1,105 @@
-footer{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    max-width: 100rem;
-    margin-top: 5rem;
-    flex-direction: column;
-    background-image: url(../Home/Wigfolder/SALE.jpg);
-}
+// Import necessary Firebase modules
+import { initializeApp } from "firebase/app";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  onAuthStateChanged, 
+  signOut, 
+  GoogleAuthProvider, 
+  signInWithPopup, 
+  sendPasswordResetEmail 
+} from "firebase/auth";
 
+// Your Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDFJY_3Uok0lJCH8zX1vi0BqXfSIrhIU24",
+  authDomain: "wigwonderland.com",
+  projectId: "wigwonderland-bc6f0",
+  storageBucket: "wigwonderland-bc6f0.appspot.com",
+  messagingSenderId: "657178258299",
+  appId: "1:657178258299:web:bd3babffc1b9f7311febde",
+  measurementId: "G-9NKET1239L"
+};
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
- .content{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-}
+// Sign up with email and password
+const signUpWithEmailAndPassword = async (email, password) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User signed up:", user);
+  } catch (error) {
+    console.error("Error signing up:", error.message);
+    throw error;
+  }
+};
 
+// Sign in with email and password
+const signInWithEmailAndPasswordWithEmail = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User signed in:", user);
+  } catch (error) {
+    console.error("Error signing in:", error.message);
+    throw error;
+  }
+};
 
-footer .content p,
-a {
-    color: #fff;
-    max-width: 300px;
-    width: 100%;
-}
+// Google Sign In
+const signInWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    console.log("User signed in with Google:", user);
+  } catch (error) {
+    console.error("Error signing in with Google:", error.message);
+    throw error;
+  }
+};
 
-footer .content .box {
-    transition: all 0.4s ease;
-        margin-right: 5rem;
-        padding-top: 2rem;
-        margin-left: 5rem;
-}
+// Reset password
+const resetPassword = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+  } catch (error) {
+    console.error("Error resetting password:", error.message);
+    throw error;
+  }
+};
 
-footer .content .topic {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 16px;
-font-family: 'Merriweather', serif;
-}
+// Sign out
+const signOutUser = async () => {
+  try {
+    await signOut(auth);
+    console.log("User signed out");
+  } catch (error) {
+    console.error("Error signing out:", error.message);
+  }
+};
 
-footer .content p {
-    text-align: justify;
-}
+// Check if the user is authenticated
+const checkAuthState = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("User is signed in:", user);
+    } else {
+      console.log("User is signed out");
+    }
+  });
+};
 
-footer .content .lower .topic {
-    margin: 24px 0 5px 0;
-}
-
-footer .content .lower i {
-    padding-right: 16px;
-}
-
-footer .content .middle {
-}
-
-footer .content .middle a {
-    line-height: 32px;
-}
-
-footer .content .right input[type="text"] {
-    height: 45px;
-    width: 100%;
-    outline: none;
-    color: #d9d9d9;
-    background: #000;
-    border-radius: 5px;
-    padding-left: 10px;
-    font-size: 17px;
-    border: 2px solid #222222;
-}
-
-footer .content .right input[type="submit"] {
-    background-color: purple;
-        color: white;
-        padding: 13px 50px;
-        font-size: 0.9em;
-        text-align: center;
-        border-radius: 5px;
-        border-width: 0;
-        opacity: 0.9;
-        cursor: pointer;
-        text-decoration: none;
-        outline: none;
-        font-family: 'Playfair Display', sans-serif;
-}
-
-footer .content .right input[type="submit"] {
-        font-family: 'Playfair Display';
-            height: 50px;
-            width: 100%;
-            font-size: 18px;
-            color: white;
-            background: purple;
-            border-radius: 5px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            margin-top: 12px;
-            transition: all 0.3s ease-in-out;
-}
-
-
-
-footer .content .media-icons a {
-    font-size: 22px;
-        height: 45px;
-        width: 45px;
-        display: inline-block;
-        text-align: center;
-        line-height: 43px;
-        color: purple;
-        width: 40px;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-}
-
-
-footer .bottom {
-    width: 100%;
-    text-align: right;
-    color: #d9d9d9;
-    padding: 0 40px 5px 0;
-}
-
-
-.copyright {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 4rem;
-    border-top: 1px solid rgb(229, 228, 228);
-    width: 100%;
-    font-size: 0.9em;
-    text-decoration: none;
-    margin-bottom: 4.5rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    opacity: 0.9;
-    font-weight: 500;
-    color: white;
-
-}
-
-
-
-@media (max-width:1100px) {
-    
-}
-
+export {
+  auth,
+  signUpWithEmailAndPassword,
+  signInWithEmailAndPasswordWithEmail,
+  signInWithGoogle,
+  signOutUser,
+  checkAuthState,
+  resetPassword,
+};
+ 
