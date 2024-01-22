@@ -1,0 +1,162 @@
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  signInWithEmailAndPasswordWithEmail,
+  signInWithGoogle,
+} from "../firebase";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEnvelope,
+  faEye,
+  faEyeSlash,
+  
+} from "@fortawesome/free-solid-svg-icons";
+import google from "./google.png";
+
+function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [showError, setShowError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [verificationStatus, setVerificationStatus] = useState(null);
+
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  // ... (previous code)
+
+  // ... (previous code)
+
+  const handleSignIn = async () => {
+    setError(null);
+    setShowError(false);
+    setVerificationStatus(null);
+
+    if (!email || !password) {
+      setShowError(true);
+      return;
+    }
+
+    try {
+      const isVerified = await signInWithEmailAndPasswordWithEmail(
+        email,
+        password
+      );
+
+      if (isVerified) {
+        const errorMessage = "Invalid email or password. Please try again.";
+       // setVerificationStatus(errorMessage);
+        // Show alert for invalid email or password
+        window.alert(errorMessage);
+      } else {
+                navigate("/");
+
+        
+      }
+    } catch (error) {
+      const errorMessage =
+        error.message || "An error occurred while signing in.";
+    if (errorMessage === "Firebase: Error (auth/invalid-credential).") {
+      // Handle 'auth/invalid-credential' error specifically
+    alert("Invalid email or password. Please try again.");
+    }
+    }
+  };
+
+  // ... (remaining code)
+
+  const handleSignInWithGoogle = async () => {
+    setError(null);
+    setShowError(false);
+    setVerificationStatus(null);
+
+    try {
+      await signInWithGoogle();
+      navigate("/");
+    } catch (error) {
+      setError(`Error signing in with Google: ${error.message}`);
+    }
+  };
+
+  return (
+    <div className="login">
+      <div className="login-con">
+        <div className="login-details">
+          <h2>LOGIN</h2>
+
+          <p>If you've created an account with us, please enter.</p>
+          <div className="input-div">
+            <div className="email-container">
+              <input
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
+                style={{ border: showError && !email ? "2px solid red" : "" }}
+              />
+              <span>
+                <FontAwesomeIcon icon={faEnvelope} />
+              </span>
+            </div>
+            {showError && !email && (
+              <span className="validation-error">Email is required.</span>
+            )}
+
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+                style={{
+                  border: showError && !password ? "2px solid red" : "",
+                }}
+              />
+              <FontAwesomeIcon
+                className="fakey"
+                icon={showPassword ? faEyeSlash : faEye}
+                onClick={togglePasswordVisibility}
+              />
+            </div>
+            {showError && !password && (
+              <span className="password-error"> Password is required.</span>
+            )}
+          </div>
+
+          <div className="resetpasswordcon">
+            <p>
+              <Link to="/reset-password">Forgot Password?</Link>
+            </p>
+          </div>
+
+          <div className="btn-con">
+            <button onClick={handleSignIn}>Sign In</button>
+          </div>
+
+          <div className="registercontainer">
+            <p>
+              Don't have an account?
+              <Link to="/registration">Register here</Link>
+            </p>
+          </div>
+
+          <p className="OR">Or</p>
+
+          <div className="google-div">
+            <button onClick={handleSignInWithGoogle}>
+              Sign In with Google
+            </button>
+            <img src={google} alt="google" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Login;
