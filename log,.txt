@@ -1,162 +1,283 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  signInWithEmailAndPasswordWithEmail,
-  signInWithGoogle,
-} from "../firebase";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope,
-  faEye,
-  faEyeSlash,
+import { faTimes} from "@fortawesome/free-solid-svg-icons";
+import "./Navbar.css";
+import "./Navbarresponsive.css";
+import Advert from "../Advert/Advert";
+import icon from '../Navbars/icon.png'
+import cart from "./cart.svg";
+import menus from "./menu-svgrepo-com.svg";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { auth, signOutUser } from "../firebase"; // Import the necessary Firebase functions
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { onAuthStateChanged, getCurrentUser } from '../firebase'; // Replace '../firebase' with the actual path
+import placeholderImage from "./account.svg";
+
+
+
+function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuVisible, setMenuVisible] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //const [userEmail, setUserEmail] = useState("");
+
+  const linkeds = () => {
+    // Get the height of the document
+    const documentHeight =
+      document.documentElement.scrollHeight || document.body.scrollHeight;
+
+    // Calculate the position to scroll to (half of the page)
+    const scrollToPosition = documentHeight / 5;
+
+    // Scroll to the calculated position smoothly
+    window.scrollTo({
+      top: scrollToPosition,
+      behavior: "smooth",
+    });
+
+    linked();
+  };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      // Update the state based on the user's authentication status
+      setIsLoggedIn(!!user);
+    });
+
+    // Clean up the subscription when the component unmounts
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOutUser();
+    } catch (error) {
+      console.error("Error signing out:", error.message);
+    }
+  };
+
+  const linked = () => {
+    setMenuVisible(false);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const toggleMenu = () => {
+    setMenuVisible(!isMenuVisible);
+  };
+
+  const closeMenu = () => {
+    setMenuVisible(false);
+  };
+
   
-} from "@fortawesome/free-solid-svg-icons";
-import google from "./google.png";
 
-function Login() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [showError, setShowError] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [verificationStatus, setVerificationStatus] = useState(null);
+  // In your component
+  const [userEmail, setUserEmail] = useState("");
+  const [userPhotoURL, setUserPhotoURL] = useState(placeholderImage);
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  useEffect(() => {
+    const user = getCurrentUser();
 
-  // ... (previous code)
+    if (user) {
+      setUserToLocalStorage(user);
+      const newUserEmail = user.email;
+      const newUserPhotoURL = user.photoURL;
 
-  // ... (previous code)
-
-  const handleSignIn = async () => {
-    setError(null);
-    setShowError(false);
-    setVerificationStatus(null);
-
-    if (!email || !password) {
-      setShowError(true);
-      return;
-    }
-
-    try {
-      const isVerified = await signInWithEmailAndPasswordWithEmail(
-        email,
-        password
-      );
-
-      if (isVerified) {
-        const errorMessage = "Invalid email or password. Please try again.";
-       // setVerificationStatus(errorMessage);
-        // Show alert for invalid email or password
-        window.alert(errorMessage);
+      if (newUserEmail) {
+        setUserEmail(newUserEmail);
       } else {
-                navigate("/");
-
-        
+        setUserEmail("");
       }
-    } catch (error) {
-      const errorMessage =
-        error.message || "An error occurred while signing in.";
-    if (errorMessage === "Firebase: Error (auth/invalid-credential).") {
-      // Handle 'auth/invalid-credential' error specifically
-    alert("Invalid email or password. Please try again.");
-    }
-    }
-  };
 
-  // ... (remaining code)
-
-  const handleSignInWithGoogle = async () => {
-    setError(null);
-    setShowError(false);
-    setVerificationStatus(null);
-
-    try {
-      await signInWithGoogle();
-      navigate("/");
-    } catch (error) {
-      setError(`Error signing in with Google: ${error.message}`);
+      if (newUserPhotoURL) {
+        setUserPhotoURL(newUserPhotoURL);
+      } else {
+        setUserPhotoURL(placeholderImage);
+      }
+    } else {
+      setUserEmail("");
+      setUserPhotoURL(placeholderImage);
     }
-  };
+  }, []); // Empty dependency array ensures that this effect runs once when the component mounts
+
+  // Listen for changes in authentication state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(() => {
+      const user = getCurrentUser();
+
+      if (user) {
+        setUserToLocalStorage(user);
+        const newUserEmail = user.email;
+        const newUserPhotoURL = user.photoURL;
+
+        if (newUserEmail) {
+          setUserEmail(newUserEmail);
+        } else {
+          setUserEmail("");
+        }
+
+        if (newUserPhotoURL) {
+          setUserPhotoURL(newUserPhotoURL);
+        } else {
+          setUserPhotoURL(placeholderImage);
+        }
+      } else {
+        setUserEmail("");
+        setUserPhotoURL(placeholderImage);
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup the listener when the component unmounts
+  }, []); // Empty dependency array ensures that this effect runs once when the component mounts
+
+
 
   return (
-    <div className="login">
-      <div className="login-con">
-        <div className="login-details">
-          <h2>LOGIN</h2>
-
-          <p>If you've created an account with us, please enter.</p>
-          <div className="input-div">
-            <div className="email-container">
-              <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={handleEmailChange}
-                style={{ border: showError && !email ? "2px solid red" : "" }}
-              />
-              <span>
-                <FontAwesomeIcon icon={faEnvelope} />
-              </span>
-            </div>
-            {showError && !email && (
-              <span className="validation-error">Email is required.</span>
-            )}
-
-            <div className="password-input-container">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-                style={{
-                  border: showError && !password ? "2px solid red" : "",
-                }}
-              />
-              <FontAwesomeIcon
-                className="fakey"
-                icon={showPassword ? faEyeSlash : faEye}
-                onClick={togglePasswordVisibility}
-              />
-            </div>
-            {showError && !password && (
-              <span className="password-error"> Password is required.</span>
-            )}
+    <div className="Navbar-cons">
+      <div
+        className={`dropdownmenu-container ${isMenuVisible ? "appear" : ""}`}
+      >
+        <div className="wigstationlogo">
+          <div>
+            <img src={icon} alt="wigwonderland icon" />
+            <h1>Wigwonderland</h1>
           </div>
-
-          <div className="resetpasswordcon">
-            <p>
-              <Link to="/reset-password">Forgot Password?</Link>
-            </p>
-          </div>
-
-          <div className="btn-con">
-            <button onClick={handleSignIn}>Sign In</button>
-          </div>
-
-          <div className="registercontainer">
-            <p>
-              Don't have an account?
-              <Link to="/registration">Register here</Link>
-            </p>
-          </div>
-
-          <p className="OR">Or</p>
-
-          <div className="google-div">
-            <button onClick={handleSignInWithGoogle}>
-              Sign In with Google
+          <div className="Cancelmenu">
+            <button onClick={closeMenu}>
+              <FontAwesomeIcon icon={faTimes} />
             </button>
-            <img src={google} alt="google" />
           </div>
         </div>
+        <div className="menu">
+          <div className="menu-div">
+            <ol>
+              <li>
+                <NavLink onClick={linked} exact to="/" className="NavLink">
+                  HOME
+                </NavLink>
+                <span></span>
+              </li>
+              <li>
+                <NavLink onClick={linkeds} className="NavLink">
+                  BEST SELLER
+                </NavLink>
+                <span></span>
+              </li>
+              <li>
+                <NavLink onClick={linked} to="/Shop" className="NavLink">
+                  SHOP
+                </NavLink>
+
+                <span></span>
+              </li>
+
+              <li>
+                <NavLink onClick={linked} to="/NewIn" className="NavLink">
+                  HD CLOSURE & FRONTAL
+                </NavLink>
+                <span></span>
+              </li>
+            </ol>
+
+            <div className="Navbar-login">
+              <span>
+                <a
+                  onClick={linked}
+                  href="https://www.instagram.com/the_wig_wonderland?igsh=YzljYTk1ODg3Zg=="
+                >
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+              </span>
+              {isLoggedIn ? (
+                // If logged in, show the Log Out button
+                <span className="log" onClick={handleLogout}>
+                  Log Out
+                </span>
+              ) : (
+                // If not logged in, show the Log In button
+                <Link onClick={linked} to="/Login" className="log">
+                  Log In
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <Advert />
+      <main>
+        <header className={`Navbar-con ${isScrolled ? "scrolled" : ""}`}>
+          <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
+            <div className="logo">
+              <h1>Wigwonderland</h1>
+            </div>
+
+            <ul className="links">
+              <li>
+                <NavLink onClick={closeMenu} exact to="/" className="NavLink">
+                  HOME
+                </NavLink>
+              </li>
+              <li>
+                <NavLink onClick={linkeds} className="NavLink">
+                  BEST SELLER
+                </NavLink>
+              </li>
+              <li>
+                <NavLink onClick={linked} to="/Shop" className="NavLink">
+                  SHOP
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink onClick={linked} to="/NewIn" className="NavLink">
+                  HD CLOSURE & FRONTAL
+                </NavLink>
+              </li>
+            </ul>
+
+            <div className="dropdowncart">
+              <div className="collapsible-container">
+                <img src={userPhotoURL} alt="User Profile" />
+                <div className="profile">
+                  {/* Your modal content goes here */}
+                  <p>
+                    <p>{userEmail}</p>
+                  </p>
+                </div>
+              </div>
+
+              <div className="cart-container">
+                <NavLink to="/cart" className="NavLink">
+                  <img src={cart} alt="Cart" />
+                  <span className="cart-count">0</span>
+                </NavLink>
+              </div>
+
+              <div className="dropdown">
+                {/* Corrected the function name */}
+                <img onClick={toggleMenu} src={menus} alt="menu" />
+              </div>
+            </div>
+          </nav>
+        </header>
+      </main>
+      <div>
+        <Outlet></Outlet>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Navbar;
