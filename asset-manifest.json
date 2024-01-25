@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/Hairwonderland/static/css/main.d7a14866.css",
-    "main.js": "/Hairwonderland/static/js/main.85a60040.js",
+    "main.css": "/Hairwonderland/static/css/main.e40a2cc8.css",
+    "main.js": "/Hairwonderland/static/js/main.5a8852a9.js",
     "static/media/thumbnails2-removebg-preview.png": "/Hairwonderland/static/media/thumbnails2-removebg-preview.fcdc417b23b1f473c09b.png",
     "static/media/istock2_result-removebg-preview - Copy.png": "/Hairwonderland/static/media/istock2_result-removebg-preview - Copy.f7af19c6f51d16d5bdf0.png",
     "static/media/smiling-4654734_1280.jpg": "/Hairwonderland/static/media/smiling-4654734_1280.439750a9163f64c6cf5d.jpg",
-    "static/media/Carou.jpg": "/Hairwonderland/static/media/Carou.7cc440e6dce7470dcac0.jpg",
     "static/media/Carousel.jpg": "/Hairwonderland/static/media/Carousel.c903d11d6fac7a31369b.jpg",
     "static/media/google.png": "/Hairwonderland/static/media/google.3598943754d65e4590f6.png",
     "static/media/icon.png": "/Hairwonderland/static/media/icon.cfcacd1947be771cee7d.png",
     "index.html": "/Hairwonderland/index.html",
-    "static/media/cart.svg": "/Hairwonderland/static/media/cart.6132c6f08ff4e8020f864eec59f92c77.svg",
-    "static/media/account.svg": "/Hairwonderland/static/media/account.295adafdb68ea1451f9f23432cd5a939.svg",
+    "static/media/cart..svg": "/Hairwonderland/static/media/cart..c8cdce25107a22b50a822ee3af154a94.svg",
+    "static/media/account.svg": "/Hairwonderland/static/media/account.267ee3175f59a84297b655f341b2478a.svg",
     "static/media/menu-svgrepo-com.svg": "/Hairwonderland/static/media/menu-svgrepo-com.ccc0d2a068ae1ae55c2dff9063d4cc11.svg",
-    "main.d7a14866.css.map": "/Hairwonderland/static/css/main.d7a14866.css.map",
-    "main.85a60040.js.map": "/Hairwonderland/static/js/main.85a60040.js.map"
+    "main.e40a2cc8.css.map": "/Hairwonderland/static/css/main.e40a2cc8.css.map",
+    "main.5a8852a9.js.map": "/Hairwonderland/static/js/main.5a8852a9.js.map"
   },
   "entrypoints": [
-    "static/css/main.d7a14866.css",
-    "static/js/main.85a60040.js"
+    "static/css/main.e40a2cc8.css",
+    "static/js/main.5a8852a9.js"
   ]
 }
