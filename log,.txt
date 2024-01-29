@@ -1,283 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes} from "@fortawesome/free-solid-svg-icons";
-import "./Navbar.css";
-import "./Navbarresponsive.css";
-import Advert from "../Advert/Advert";
-import icon from '../Navbars/icon.png'
-import cart from "./cart.svg";
-import menus from "./menu-svgrepo-com.svg";
-import { Link, NavLink, Outlet } from "react-router-dom";
-import { auth, signOutUser } from "../firebase"; // Import the necessary Firebase functions
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { onAuthStateChanged, getCurrentUser } from '../firebase'; // Replace '../firebase' with the actual path
-import placeholderImage from "./account.svg";
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+require('dotenv').config();
 
+const app = express();
+const PORT = 3003;
 
+app.use(cors());
+app.use(express.json());
 
-function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuVisible, setMenuVisible] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  //const [userEmail, setUserEmail] = useState("");
+app.get('/api/products', async (req, res) => {
+  try {
+    const apiKey = "edc3d9dd915f71f0375db6c44fa2aef5fd5a05f5b913f0569a308924e1f51410"; // Replace with your actual SerpApi API key
+    const searchQuery = 'best seller human hair'; // Update the search query
 
-  const linkeds = () => {
-    // Get the height of the document
-    const documentHeight =
-      document.documentElement.scrollHeight || document.body.scrollHeight;
+    const apiUrl = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(searchQuery)}&api_key=${apiKey}`;
 
-    // Calculate the position to scroll to (half of the page)
-    const scrollToPosition = documentHeight / 5;
+    console.log('SerpApi URL:', apiUrl);
 
-    // Scroll to the calculated position smoothly
-    window.scrollTo({
-      top: scrollToPosition,
-      behavior: "smooth",
-    });
+    const { data } = await axios.get(apiUrl);
 
-    linked();
-  };
+    const shoppingResults = data.shopping_results || [];
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      // Update the state based on the user's authentication status
-      setIsLoggedIn(!!user);
-    });
+    const products = shoppingResults.map((result) => ({
+      id: result.product_id,
+      title: result.title,
+      link: result.link,
+      productLink: result.product_link,
+      serpApiProductApi: result.serpapi_product_api,
+      source: result.source,
+      price: result.price,
+      extractedPrice: result.extracted_price,
+      rating: result.rating,
+      reviews: result.reviews,
+      extensions: result.extensions,
+      thumbnail: result.thumbnail,
+      delivery: result.delivery,
+      storeRating: result.store_rating,
+      storeReviews: result.store_reviews,
+      remark: result.remark,
+      // ... other details
+    }));
 
-    // Clean up the subscription when the component unmounts
-    return () => unsubscribe();
-  }, []);
+      res.json(products);
+      console.log(products)
+  } catch (error) {
+    console.error('Error fetching data from SerpApi:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-  const handleLogout = async () => {
-    try {
-      await signOutUser();
-    } catch (error) {
-      console.error("Error signing out:", error.message);
-    }
-  };
-
-  const linked = () => {
-    setMenuVisible(false);
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const toggleMenu = () => {
-    setMenuVisible(!isMenuVisible);
-  };
-
-  const closeMenu = () => {
-    setMenuVisible(false);
-  };
-
-  
-
-  // In your component
-  const [userEmail, setUserEmail] = useState("");
-  const [userPhotoURL, setUserPhotoURL] = useState(placeholderImage);
-
-  useEffect(() => {
-    const user = getCurrentUser();
-
-    if (user) {
-      setUserToLocalStorage(user);
-      const newUserEmail = user.email;
-      const newUserPhotoURL = user.photoURL;
-
-      if (newUserEmail) {
-        setUserEmail(newUserEmail);
-      } else {
-        setUserEmail("");
-      }
-
-      if (newUserPhotoURL) {
-        setUserPhotoURL(newUserPhotoURL);
-      } else {
-        setUserPhotoURL(placeholderImage);
-      }
-    } else {
-      setUserEmail("");
-      setUserPhotoURL(placeholderImage);
-    }
-  }, []); // Empty dependency array ensures that this effect runs once when the component mounts
-
-  // Listen for changes in authentication state
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(() => {
-      const user = getCurrentUser();
-
-      if (user) {
-        setUserToLocalStorage(user);
-        const newUserEmail = user.email;
-        const newUserPhotoURL = user.photoURL;
-
-        if (newUserEmail) {
-          setUserEmail(newUserEmail);
-        } else {
-          setUserEmail("");
-        }
-
-        if (newUserPhotoURL) {
-          setUserPhotoURL(newUserPhotoURL);
-        } else {
-          setUserPhotoURL(placeholderImage);
-        }
-      } else {
-        setUserEmail("");
-        setUserPhotoURL(placeholderImage);
-      }
-    });
-
-    return () => unsubscribe(); // Cleanup the listener when the component unmounts
-  }, []); // Empty dependency array ensures that this effect runs once when the component mounts
-
-
-
-  return (
-    <div className="Navbar-cons">
-      <div
-        className={`dropdownmenu-container ${isMenuVisible ? "appear" : ""}`}
-      >
-        <div className="wigstationlogo">
-          <div>
-            <img src={icon} alt="wigwonderland icon" />
-            <h1>Wigwonderland</h1>
-          </div>
-          <div className="Cancelmenu">
-            <button onClick={closeMenu}>
-              <FontAwesomeIcon icon={faTimes} />
-            </button>
-          </div>
-        </div>
-        <div className="menu">
-          <div className="menu-div">
-            <ol>
-              <li>
-                <NavLink onClick={linked} exact to="/" className="NavLink">
-                  HOME
-                </NavLink>
-                <span></span>
-              </li>
-              <li>
-                <NavLink onClick={linkeds} className="NavLink">
-                  BEST SELLER
-                </NavLink>
-                <span></span>
-              </li>
-              <li>
-                <NavLink onClick={linked} to="/Shop" className="NavLink">
-                  SHOP
-                </NavLink>
-
-                <span></span>
-              </li>
-
-              <li>
-                <NavLink onClick={linked} to="/NewIn" className="NavLink">
-                  HD CLOSURE & FRONTAL
-                </NavLink>
-                <span></span>
-              </li>
-            </ol>
-
-            <div className="Navbar-login">
-              <span>
-                <a
-                  onClick={linked}
-                  href="https://www.instagram.com/the_wig_wonderland?igsh=YzljYTk1ODg3Zg=="
-                >
-                  <FontAwesomeIcon icon={faInstagram} />
-                </a>
-              </span>
-              {isLoggedIn ? (
-                // If logged in, show the Log Out button
-                <span className="log" onClick={handleLogout}>
-                  Log Out
-                </span>
-              ) : (
-                // If not logged in, show the Log In button
-                <Link onClick={linked} to="/Login" className="log">
-                  Log In
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-      <Advert />
-      <main>
-        <header className={`Navbar-con ${isScrolled ? "scrolled" : ""}`}>
-          <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
-            <div className="logo">
-              <h1>Wigwonderland</h1>
-            </div>
-
-            <ul className="links">
-              <li>
-                <NavLink onClick={closeMenu} exact to="/" className="NavLink">
-                  HOME
-                </NavLink>
-              </li>
-              <li>
-                <NavLink onClick={linkeds} className="NavLink">
-                  BEST SELLER
-                </NavLink>
-              </li>
-              <li>
-                <NavLink onClick={linked} to="/Shop" className="NavLink">
-                  SHOP
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink onClick={linked} to="/NewIn" className="NavLink">
-                  HD CLOSURE & FRONTAL
-                </NavLink>
-              </li>
-            </ul>
-
-            <div className="dropdowncart">
-              <div className="collapsible-container">
-                <img src={userPhotoURL} alt="User Profile" />
-                <div className="profile">
-                  {/* Your modal content goes here */}
-                  <p>
-                    <p>{userEmail}</p>
-                  </p>
-                </div>
-              </div>
-
-              <div className="cart-container">
-                <NavLink to="/cart" className="NavLink">
-                  <img src={cart} alt="Cart" />
-                  <span className="cart-count">0</span>
-                </NavLink>
-              </div>
-
-              <div className="dropdown">
-                {/* Corrected the function name */}
-                <img onClick={toggleMenu} src={menus} alt="menu" />
-              </div>
-            </div>
-          </nav>
-        </header>
-      </main>
-      <div>
-        <Outlet></Outlet>
-      </div>
-    </div>
-  );
-}
-
-export default Navbar;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

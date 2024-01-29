@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Hairwonderland/static/css/main.ad4de8b4.css",
-    "main.js": "/Hairwonderland/static/js/main.21a44be8.js",
+    "main.css": "/Hairwonderland/static/css/main.0c2eb0a4.css",
+    "main.js": "/Hairwonderland/static/js/main.d7eb189c.js",
     "static/media/thumbnails2-removebg-preview.png": "/Hairwonderland/static/media/thumbnails2-removebg-preview.fcdc417b23b1f473c09b.png",
     "static/media/istock2_result-removebg-preview - Copy.png": "/Hairwonderland/static/media/istock2_result-removebg-preview - Copy.f7af19c6f51d16d5bdf0.png",
     "static/media/smiling-4654734_1280.jpg": "/Hairwonderland/static/media/smiling-4654734_1280.439750a9163f64c6cf5d.jpg",
@@ -13,11 +13,11 @@
     "static/media/cart..svg": "/Hairwonderland/static/media/cart..c8cdce25107a22b50a822ee3af154a94.svg",
     "static/media/account.svg": "/Hairwonderland/static/media/account.267ee3175f59a84297b655f341b2478a.svg",
     "static/media/menu-svgrepo-com.svg": "/Hairwonderland/static/media/menu-svgrepo-com.ccc0d2a068ae1ae55c2dff9063d4cc11.svg",
-    "main.ad4de8b4.css.map": "/Hairwonderland/static/css/main.ad4de8b4.css.map",
-    "main.21a44be8.js.map": "/Hairwonderland/static/js/main.21a44be8.js.map"
+    "main.0c2eb0a4.css.map": "/Hairwonderland/static/css/main.0c2eb0a4.css.map",
+    "main.d7eb189c.js.map": "/Hairwonderland/static/js/main.d7eb189c.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad4de8b4.css",
-    "static/js/main.21a44be8.js"
+    "static/css/main.0c2eb0a4.css",
+    "static/js/main.d7eb189c.js"
   ]
 }
